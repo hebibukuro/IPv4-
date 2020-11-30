@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IPv4アドレス生成
+    </title>
+    <style type="text/css">
+        /*------- タグ標準 ------*/
+        
+        form {
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        input.txt {
+            font-size: 14pt;
+            height: 26px;
+            width: 230px;
+            font-weight: bold;
+            font-family: 'ＭＳ ゴシック', 'Osaka-等幅', 'MS UI GOTHIC', 'Osaka', sans-serif;
+            background-color: #EEFFFF;
+            color: #333333;
+            border: 1px solid #006699;
+            text-align: center;
+            line-height: 16px;
+        }
+        
+        input.txt::-webkit-input-placeholder {
+            color: #999;
+        }
+        
+        input.txt:-ms-input-placeholder {
+            color: #999;
+        }
+        
+        input.txt::-moz-placeholder {
+            color: #999;
+        }
+        /*------------- エラーメッセージ --------------*/
+        
+        .err-msg {
+            font-weight: bold;
+            color: red;
+            background-color: #ffddee;
+            margin: 5px;
+            padding: 5px;
+            border: 2px solid red;
+            text-align: left;
+        }
+        
+        input.btn {
+            font-size: 12pt;
+            height: 30px;
+            width: 230px;
+        }
+        /*------------ FLEX -----------------------*/
+        
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            height: auto;
+        }
+        
+        .contents {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .output {
+            overflow: scroll;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+
+            <form name="form_ip">
+                <div style="border: 1px solid gray;padding: 10px;">
+                    <div id="ERR-MSG" class="err-msg" style="display:none;"></div>
+                    <div style="margin: 5px 15px;padding: 5px;text-align: center;">
+                        <div style="margin-bottom: 10px">
+                            <div class="inGaidCell">開始IPアドレス</div>
+                            <div class="inAreaCell">
+                                <input type="text" maxlength="15" name="ip" class="txt" value="" id="TXT_IP" placeholder="(例)192.168.1.10">
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 15px">
+                            <div class="inGaidCell">件数</div>
+                            <div class="inAreaCell">
+                                <input type="number" maxlength="6" name="count" class="txt" value="" id="TXT_COUNT" placeholder="(例)10">
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 15px">
+                            <div class="inGaidCell">ポート番号(:始まり)orサブネット(/始まり)</div>
+                            <div class="inAreaCell">
+                                <input type="text" name="port" class="txt" value="" id="TXT_PORT" placeholder="(例)12345">
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 10px">
+                            <div class="inGaidCell">　</div>
+                            <div class="inAreaCell">
+                                <input type="button" value="計算実行" onclick="goCalc(false)" id="BTN-GOCALC" class="btn">
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 10px">
+                            <div class="inGaidCell">　</div>
+                            <div class="inAreaCell">
+                                <input type="button" value="ダウンロード" onclick="goCalc(true)" id="BTN-DL" class="btn">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="OUTPUT" class="contents">
+            <!-- コンテンツ -->
+        </div>
+        <script>
+            function goCalc(isDL) {
+                const result = ["IPアドレス"];
+
+                var div_err = document.getElementById("ERR-MSG");
+                div_err.innerText = "";
+                div_err.style.display = "none";
+
+                var maxcnt = document.form_ip.count.value;
+                var strIP = document.form_ip.ip.value;
+                var port = document.form_ip.port.value;
+
+                //分割
+                var ipList = strIP.split("\.");
+                if (ipList.length != 4) {
+                    div_err.innerText = "IP指定がエラー";
+                    div_err.style.display = "inline";
+                    return;
+                }
+                var div_out = document.getElementById("OUTPUT");
+                //クリア
+                var clone = div_out.cloneNode(false); //ガワだけ複製して…
+                div_out.parentNode.replaceChild(clone, div_out); //すげ替え。
+                div_out = clone;
+
+                console.log("maxcnt : " + maxcnt);
+                if (true) {
+                    var i = 1;
+                    //label文(ステートメントの前にしかラベルは置けません)
+                    endloop:
+                        for (var a = ipList[0]; a < 256; a++) {
+                            for (var b = ipList[1]; b < 256; b++) {
+                                for (var c = ipList[2]; c < 256; c++) {
+                                    for (var d = ipList[3]; d < 256; d++) {
+                                        if (i > maxcnt) {
+                                            //goto endloopラベル
+                                            break endloop;
+                                        }
+                                        var outstr = a + "." + b + "." + c + "." + d + port;
+                                        console.log(outstr + " " + i);
+                                        result.push(outstr);
+                                        var item = document.createElement("p");
+                                        item.setAttribute("class", "ipitem");
+                                        item.innerHTML = outstr;
+                                        div_out.appendChild(item);
+                                        i++;
+                                    }
+                                    ipList[3] = 0; //次回は0始まり
+                                }
+                                ipList[2] = 0; //次回は0始まり
+                            }
+                            ipList[1] = 0; //次回は0始まり
+                        }
+
+                }
+
+                if (isDL) {
+                    if (result.length < 1) {
+                        return;
+                    }
+                    let blobUrl = (function(data) {
+                        if (!(typeof Blob !== 'undefined')) {
+                            return false;
+                        }
+                        window.URL = window.URL || window.webkitURL;
+                        if (!window.URL) {
+                            return false;
+                        }
+                        let blob = new Blob([data.join('\r\n')], {
+                            "type": "text/plain"
+                        });
+                        return window.URL.createObjectURL(blob);
+                    })(result);
+                    if (blobUrl === false) {
+                        return;
+                    }
+                    let link = document.createElement('a');
+                    link.href = blobUrl;
+                    link.download = 'IPLIST-' + (new Date()).getTime() + '.txt';
+                    link.click();
+                }
+            }
+        </script>
+    </div>
+</body>
+
+</html>
