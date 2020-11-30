@@ -2,10 +2,10 @@
 <html>
 
 <head>
-    <title>IPv4ƒAƒhƒŒƒX¶¬
+    <title>IPv4ã‚¢ãƒ‰ãƒ¬ã‚¹ç”Ÿæˆ
     </title>
     <style type="text/css">
-        /*------- ƒ^ƒO•W€ ------*/
+        /*------- ã‚¿ã‚°æ¨™æº– ------*/
         
         form {
             padding: 0px;
@@ -17,7 +17,7 @@
             height: 26px;
             width: 230px;
             font-weight: bold;
-            font-family: '‚l‚r ƒSƒVƒbƒN', 'Osaka-“™•', 'MS UI GOTHIC', 'Osaka', sans-serif;
+            font-family: 'ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯', 'Osaka-ç­‰å¹…', 'MS UI GOTHIC', 'Osaka', sans-serif;
             background-color: #EEFFFF;
             color: #333333;
             border: 1px solid #006699;
@@ -36,7 +36,7 @@
         input.txt::-moz-placeholder {
             color: #999;
         }
-        /*------------- ƒGƒ‰[ƒƒbƒZ[ƒW --------------*/
+        /*------------- ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ --------------*/
         
         .err-msg {
             font-weight: bold;
@@ -85,33 +85,33 @@
                     <div id="ERR-MSG" class="err-msg" style="display:none;"></div>
                     <div style="margin: 5px 15px;padding: 5px;text-align: center;">
                         <div style="margin-bottom: 10px">
-                            <div class="inGaidCell">ŠJnIPƒAƒhƒŒƒX</div>
+                            <div class="inGaidCell">é–‹å§‹IPã‚¢ãƒ‰ãƒ¬ã‚¹</div>
                             <div class="inAreaCell">
-                                <input type="text" maxlength="15" name="ip" class="txt" value="" id="TXT_IP" placeholder="(—á)192.168.1.10">
+                                <input type="text" maxlength="15" name="ip" class="txt" value="" id="TXT_IP" placeholder="(ä¾‹)192.168.1.10">
                             </div>
                         </div>
                         <div style="margin-bottom: 15px">
-                            <div class="inGaidCell">Œ”</div>
+                            <div class="inGaidCell">ä»¶æ•°</div>
                             <div class="inAreaCell">
-                                <input type="number" maxlength="6" name="count" class="txt" value="" id="TXT_COUNT" placeholder="(—á)10">
+                                <input type="number" maxlength="6" name="count" class="txt" value="" id="TXT_COUNT" placeholder="(ä¾‹)10">
                             </div>
                         </div>
                         <div style="margin-bottom: 15px">
-                            <div class="inGaidCell">ƒ|[ƒg”Ô†(:n‚Ü‚è)orƒTƒuƒlƒbƒg(/n‚Ü‚è)</div>
+                            <div class="inGaidCell">ãƒãƒ¼ãƒˆç•ªå·(:å§‹ã¾ã‚Š)orã‚µãƒ–ãƒãƒƒãƒˆ(/å§‹ã¾ã‚Š)</div>
                             <div class="inAreaCell">
-                                <input type="text" name="port" class="txt" value="" id="TXT_PORT" placeholder="(—á)12345">
+                                <input type="text" name="port" class="txt" value="" id="TXT_PORT" placeholder="(ä¾‹)12345">
                             </div>
                         </div>
                         <div style="margin-bottom: 10px">
-                            <div class="inGaidCell">@</div>
+                            <div class="inGaidCell">ã€€</div>
                             <div class="inAreaCell">
-                                <input type="button" value="ŒvZÀs" onclick="goCalc(false)" id="BTN-GOCALC" class="btn">
+                                <input type="button" value="è¨ˆç®—å®Ÿè¡Œ" onclick="goCalc(false)" id="BTN-GOCALC" class="btn">
                             </div>
                         </div>
                         <div style="margin-bottom: 10px">
-                            <div class="inGaidCell">@</div>
+                            <div class="inGaidCell">ã€€</div>
                             <div class="inAreaCell">
-                                <input type="button" value="ƒ_ƒEƒ“ƒ[ƒh" onclick="goCalc(true)" id="BTN-DL" class="btn">
+                                <input type="button" value="ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰" onclick="goCalc(true)" id="BTN-DL" class="btn">
                             </div>
                         </div>
                     </div>
@@ -119,11 +119,11 @@
             </form>
         </div>
         <div id="OUTPUT" class="contents">
-            <!-- ƒRƒ“ƒeƒ“ƒc -->
+            <!-- ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ -->
         </div>
         <script>
             function goCalc(isDL) {
-                const result = ["IPƒAƒhƒŒƒX"];
+                const result = ["IPã‚¢ãƒ‰ãƒ¬ã‚¹"];
 
                 var div_err = document.getElementById("ERR-MSG");
                 div_err.innerText = "";
@@ -133,30 +133,30 @@
                 var strIP = document.form_ip.ip.value;
                 var port = document.form_ip.port.value;
 
-                //•ªŠ„
+                //åˆ†å‰²
                 var ipList = strIP.split("\.");
                 if (ipList.length != 4) {
-                    div_err.innerText = "IPw’è‚ªƒGƒ‰[";
+                    div_err.innerText = "IPæŒ‡å®šãŒã‚¨ãƒ©ãƒ¼";
                     div_err.style.display = "inline";
                     return;
                 }
                 var div_out = document.getElementById("OUTPUT");
-                //ƒNƒŠƒA
-                var clone = div_out.cloneNode(false); //ƒKƒ‚¾‚¯•¡»‚µ‚Äc
-                div_out.parentNode.replaceChild(clone, div_out); //‚·‚°‘Ö‚¦B
+                //ã‚¯ãƒªã‚¢
+                var clone = div_out.cloneNode(false); //ã‚¬ãƒ¯ã ã‘è¤‡è£½ã—ã¦â€¦
+                div_out.parentNode.replaceChild(clone, div_out); //ã™ã’æ›¿ãˆã€‚
                 div_out = clone;
 
                 console.log("maxcnt : " + maxcnt);
                 if (true) {
                     var i = 1;
-                    //label•¶(ƒXƒe[ƒgƒƒ“ƒg‚Ì‘O‚É‚µ‚©ƒ‰ƒxƒ‹‚Í’u‚¯‚Ü‚¹‚ñ)
+                    //labelæ–‡(ã‚¹ãƒ†ãƒ¼ãƒˆãƒ¡ãƒ³ãƒˆã®å‰ã«ã—ã‹ãƒ©ãƒ™ãƒ«ã¯ç½®ã‘ã¾ã›ã‚“)
                     endloop:
                         for (var a = ipList[0]; a < 256; a++) {
                             for (var b = ipList[1]; b < 256; b++) {
                                 for (var c = ipList[2]; c < 256; c++) {
                                     for (var d = ipList[3]; d < 256; d++) {
                                         if (i > maxcnt) {
-                                            //goto endloopƒ‰ƒxƒ‹
+                                            //goto endloopãƒ©ãƒ™ãƒ«
                                             break endloop;
                                         }
                                         var outstr = a + "." + b + "." + c + "." + d + port;
@@ -168,11 +168,11 @@
                                         div_out.appendChild(item);
                                         i++;
                                     }
-                                    ipList[3] = 0; //Ÿ‰ñ‚Í0n‚Ü‚è
+                                    ipList[3] = 0; //æ¬¡å›ã¯0å§‹ã¾ã‚Š
                                 }
-                                ipList[2] = 0; //Ÿ‰ñ‚Í0n‚Ü‚è
+                                ipList[2] = 0; //æ¬¡å›ã¯0å§‹ã¾ã‚Š
                             }
-                            ipList[1] = 0; //Ÿ‰ñ‚Í0n‚Ü‚è
+                            ipList[1] = 0; //æ¬¡å›ã¯0å§‹ã¾ã‚Š
                         }
 
                 }
