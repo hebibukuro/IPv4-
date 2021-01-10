@@ -177,10 +177,13 @@
 
                 }
 
+                //ダウンロード処理
                 if (isDL) {
+                    //結果がない場合は終了
                     if (result.length < 1) {
                         return;
                     }
+                    //ダウンロードデータ作成
                     let blobUrl = (function(data) {
                         if (!(typeof Blob !== 'undefined')) {
                             return false;
@@ -189,17 +192,24 @@
                         if (!window.URL) {
                             return false;
                         }
+                        //データを改行で連結してテキストデータに指定する。
                         let blob = new Blob([data.join('\r\n')], {
                             "type": "text/plain"
                         });
+                        
                         return window.URL.createObjectURL(blob);
                     })(result);
+                    
+                    //
                     if (blobUrl === false) {
                         return;
                     }
+                    //リンクを作成
                     let link = document.createElement('a');
                     link.href = blobUrl;
+                    //現在時刻のファイル名を設定
                     link.download = 'IPLIST-' + (new Date()).getTime() + '.txt';
+                    //リンクをキック
                     link.click();
                 }
             }
